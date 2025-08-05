@@ -12,7 +12,7 @@ import { Category } from './entities/category_entity';
 @Module({
   imports: [
     ItemsModule,
-    ConfigModule.forRoot(), 
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
@@ -22,7 +22,7 @@ import { Category } from './entities/category_entity';
       database: process.env.DB_NAME,
       autoLoadEntities: true,
       synchronize: true,
-      ssl: true, 
+      ssl: true,
     }),
     TypeOrmModule.forFeature([Item, Label, Category]),
     ServeStaticModule.forRoot({

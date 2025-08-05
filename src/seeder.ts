@@ -18,7 +18,7 @@ async function seed() {
   await dataSource.initialize();
 
   const labelNames = ['seasonal', 'top 100'];
-  const labels = labelNames.map(name => dataSource.manager.create(Label, { name }));
+  const labels = labelNames.map((name) => dataSource.manager.create(Label, { name }));
   await dataSource.manager.save(labels);
 
   const mainCategories: Category[] = [];

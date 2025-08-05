@@ -11,7 +11,7 @@ export class ItemsController {
     return items;
   }
 
-    @Get('similar')
+  @Get('similar')
   async getSimilarItems() {
     return await this.itemsService.findSimilarItems();
   }
