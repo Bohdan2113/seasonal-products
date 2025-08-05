@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Item Viewer</title>
+  </head>
+  <body>
+    <h1>Item Browser</h1>
+    <button onclick="load('seasonal')">Show Seasonal Items</button>
+    <button onclick="load('similar')">Show Similar Products</button>
+    <button onclick="load('random')">
+      Show Random Items with Localization
+    </button>
+
+    <div id="result"></div>
+
+    <script>
+      async function load(path) {
+        const res = await fetch(`/${path}`);
+        const data = await res.json();
+        document.getElementById('result').innerHTML =
+          '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+      }
+    </script>
+  </body>
+</html>
