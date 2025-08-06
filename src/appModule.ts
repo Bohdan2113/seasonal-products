@@ -3,11 +3,11 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import path from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { ItemsModule } from './items_module';
+import { ItemsModule } from './itemsModule';
 
-import { Item } from './entities/item_entity';
-import { Label } from './entities/label_entity';
-import { Category } from './entities/category_entity';
+import { Item } from './entities/itemEntity';
+import { Label } from './entities/labelEntity';
+import { Category } from './entities/categoryEntity';
 
 @Module({
   imports: [
@@ -21,7 +21,8 @@ import { Category } from './entities/category_entity';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       autoLoadEntities: true,
-      synchronize: true,
+      // migrations: ['src/migrations/*.ts'], 
+      synchronize: false,
       ssl: true,
     }),
     TypeOrmModule.forFeature([Item, Label, Category]),

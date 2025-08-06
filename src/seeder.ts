@@ -1,7 +1,7 @@
 import { DataSource } from 'typeorm';
-import { Category } from './entities/category_entity';
-import { Item } from './entities/item_entity';
-import { Label } from './entities/label_entity';
+import { Category } from './entities/categoryEntity';
+import { Item } from './entities/itemEntity';
+import { Label } from './entities/labelEntity';
 import 'dotenv/config';
 
 const dataSource = new DataSource({

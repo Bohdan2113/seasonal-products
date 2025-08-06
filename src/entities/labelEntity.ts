@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm';
-import { Item } from './item_entity';
+import { Item } from './itemEntity';
 
 @Entity()
 export class Label {

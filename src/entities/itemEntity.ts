@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne } from 'typeorm';
-import { Category } from './category_entity';
-import { Label } from './label_entity';
+import { Category } from './categoryEntity';
+import { Label } from './labelEntity';
 
 @Entity()
 export class Item {

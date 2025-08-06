@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Item } from './entities/item_entity';
-import { Label } from './entities/label_entity';
-import { Category } from './entities/category_entity';
-import { ItemsService } from './items_service';
-import { ItemsController } from './items_controller';
+import { Item } from './entities/itemEntity';
+import { Label } from './entities/labelEntity';
+import { Category } from './entities/categoryEntity';
+import { ItemsService } from './itemsService';
+import { ItemsController } from './itemsController';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Item, Label, Category])],

@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, In, LessThan } from 'typeorm';
-import { Item } from './entities/item_entity';
-import { Label } from './entities/label_entity';
-import { Category } from './entities/category_entity';
+import { Item } from './entities/itemEntity';
+import { Label } from './entities/labelEntity';
+import { Category } from './entities/categoryEntity';
 
 @Injectable()
 export class ItemsService {
@@ -19,19 +19,23 @@ export class ItemsService {
   ) {}
 
   async findSeasonalItems(): Promise<Item[]> {
+    const MAX_PRICE = 100;
+    
     const seasonalLabel = await this.labelsRepository.findOneBy({ name: 'seasonal' });
     if (!seasonalLabel) return [];
 
     return this.itemsRepository.find({
       where: {
         labels: { id: seasonalLabel.id },
-        price: LessThan(100),
+        price: LessThan(MAX_PRICE),
       },
       relations: ['labels', 'category'],
     });
   }
 
   async findSimilarItems(): Promise<Item[]> {
+    const REQUEST_LIMIT = 5;
+
     // Випадковий базовий товар
     const baseItem = await this.itemsRepository
       .createQueryBuilder('item')
@@ -66,17 +70,19 @@ export class ItemsService {
       .addSelect('ABS(item.price - :basePrice)', 'price_diff')
       .setParameter('basePrice', baseItem.price)
       .orderBy('price_diff', 'ASC')
-      .limit(5)
+      .limit(REQUEST_LIMIT)
       .getMany();
 
     return similarItems;
   }
 
   async findLocalizedRandomItems() {
+    const REQUEST_LIMIT = 5;
+
     const items = await this.itemsRepository
       .createQueryBuilder('item')
       .orderBy('RANDOM()')
-      .limit(5)
+      .limit(REQUEST_LIMIT)
       .getMany();
 
     return items.map((item) => ({
